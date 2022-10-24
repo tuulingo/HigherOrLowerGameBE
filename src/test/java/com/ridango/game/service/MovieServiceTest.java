@@ -11,6 +11,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import java.math.BigInteger;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,6 +40,20 @@ class MovieServiceTest {
     }
 
     @Test
+    void willThrowWhenFindMovieNotFound() {
+        BigInteger id = BigInteger.valueOf(10);
+        given(movieRepository.existsById(id))
+                .willReturn(false);
+
+        assertThatThrownBy(() -> underTest.findMovieById(id))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("movie with id " + id + " does not exist");
+
+        verify(movieRepository, never()).findById(any());
+    }
+
+    @Test
     void canFindMovieById() {
     }
+
 }

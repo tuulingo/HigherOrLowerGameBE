@@ -54,6 +54,12 @@ class MovieServiceTest {
 
     @Test
     void canFindMovieById() {
+        BigInteger id = BigInteger.valueOf(10);
+        given(movieRepository.existsById(id)).willReturn(true);
+
+        underTest.findMovieById(id);
+
+        verify(movieRepository).findById(id);
     }
 
 }

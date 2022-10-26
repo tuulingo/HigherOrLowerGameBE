@@ -9,8 +9,7 @@ import java.sql.Date;
 @Entity
 public class Movie implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger ID;
     private String ORIGINAL_TITLE;
     private String OVERVIEW;
@@ -113,8 +112,7 @@ public class Movie implements Serializable {
         this.VOTE_COUNT = VOTE_COUNT;
     }
 
-    public Movie(BigInteger id, String original_title, String overview, BigDecimal popularity, Date release_date, BigInteger revenue, BigDecimal runtime, String tagline, String title, BigDecimal vote_average, Integer vote_count) {
-        ID = id;
+    public Movie(String original_title, String overview, BigDecimal popularity, Date release_date, BigInteger revenue, BigDecimal runtime, String tagline, String title, BigDecimal vote_average, Integer vote_count) {
         ORIGINAL_TITLE = original_title;
         OVERVIEW = overview;
         POPULARITY = popularity;

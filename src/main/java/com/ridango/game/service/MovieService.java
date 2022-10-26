@@ -30,5 +30,9 @@ public class MovieService {
         throw new IllegalStateException("movie with id " + id + " does not exist");
     }
 
+    public void addMovie(Movie movie) {
+        movieRepository.save(movie);
+    }
+
 
 }
